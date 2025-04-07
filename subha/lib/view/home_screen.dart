@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:subha/controller/repository.dart';
+import 'package:subha/controller/data_container.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final repo = Repository.of(context);
+    final data = context.dependOnInheritedWidgetOfExactType<DataContainer>()!;
     return Scaffold(
       appBar: AppBar(
-        title: Text('SUBHA', style: TextStyle(fontWeight: FontWeight.bold)),
+        title: Text('Subha', style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
 
@@ -21,18 +21,18 @@ class HomeScreen extends StatelessWidget {
           spacing: 16.0,
           children: [
             Text(
-              '${repo.counter}',
+              '${data.counter}',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-            ElevatedButton(
-              onPressed: () {
-                repo.increment();
-              },
-              child: Text('Increment'),
-            ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          data.increment();
+        },
+        child: Icon(Icons.add),
       ),
     );
   }
