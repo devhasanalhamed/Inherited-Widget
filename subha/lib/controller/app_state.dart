@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subha/controller/repository.dart';
+import 'package:subha/controller/data_container.dart';
 
 class AppState extends StatefulWidget {
   final Widget child;
@@ -10,16 +10,20 @@ class AppState extends StatefulWidget {
 }
 
 class AppStateState extends State<AppState> {
-  var counter = 0;
+  int counter = 0;
 
   void increment() {
     setState(() {
-      counter += 1;
+      counter++;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Repository(counter: counter, state: this, child: widget.child);
+    return DataContainer(
+      counter: counter,
+      increment: increment,
+      child: widget.child,
+    );
   }
 }
